@@ -1,9 +1,8 @@
 "use client"
 import React from 'react'
-import avatar from '../../public/Avataaar.svg'
 import logo from '../../public/logo.svg'
 import Image from "next/image";
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import {  UserButton } from '@clerk/nextjs'
 const Header = () => {
   return (
     <div>

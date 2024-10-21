@@ -1,6 +1,6 @@
 import React from 'react'
 import Wrapper from './Wrapper'
-import { SignedIn, auth } from "@clerk/nextjs";
+import {auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 const page = () => {
   const { userId } = auth();

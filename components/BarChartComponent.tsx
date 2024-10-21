@@ -4,6 +4,8 @@ import * as React from "react"
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
+
+
 const data = [
   { date: "5th Mar", lower: 550, upper: 300, extra: 480, total: 356 },
   { date: "6th Mar", lower: 300, upper: 199, extra: 320, total: 998 },

@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import MonthlyExpenseCard from './Chart'
-import { fetchTransactions } from "@/redux/transactionSlice";
 import { RootState, AppDispatch } from "@/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 
