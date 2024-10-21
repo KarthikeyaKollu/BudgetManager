@@ -67,7 +67,7 @@ export default function BarChartComponent() {
   return (
     <Card className="w-[654px] h-[632px]  bg-white rounded-[16px] shadow-[0_4px_16px_rgba(0,0,0,0.1)]">
       <CardHeader>
-        <CardTitle>Last week</CardTitle>
+        <p className="font-bold text-lg">Last week</p>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={550}>

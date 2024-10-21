@@ -76,9 +76,11 @@ const Modal = ({ onClose }) => {
   };
 
 
+  const host = process.env.NEXT_PUBLIC_HOST_API
+
   const postExpense = async (expenseData) => {
     try {
-      const response = await fetch('http://localhost:3000/expenses', {
+      const response = await fetch(`${host}/expenses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

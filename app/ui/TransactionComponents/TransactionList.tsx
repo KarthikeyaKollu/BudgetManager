@@ -50,10 +50,10 @@ const TransactionList: React.FC = () => {
 
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>("All");
-
+   const [state, setState] = useState('loading')
   const { user } = useUser(); // Use useUser hook to get the user object
   const userId = user?.id;
-  console.log(user)
+
   const dispatch = useDispatch<AppDispatch>();
   const { items: transactions, loading, error } = useSelector(
     (state: RootState) => state.transactions
@@ -68,12 +68,14 @@ const TransactionList: React.FC = () => {
         if (fetchTransactions.fulfilled.match(resultAction)) {
             
         } else {
-          alert('Failed to fetch transactions.');
+          // alert('Failed to fetch transactions.');
         }
       } else {
         console.error("User ID is not available");
       }
     };
+
+   
 
     handleFetchTransactions();
   }, [dispatch, userId]);
@@ -126,7 +128,7 @@ const TransactionList: React.FC = () => {
     setSelectedSubcategory("All");
   };
 
-  if (loading) return <p>Loading transactions...</p>;
+  if (loading){  return <p>Loading transactions...</p>};
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -162,7 +164,7 @@ const TransactionList: React.FC = () => {
           ))}
         </div>
 
-        <div className="overflow-y-auto max-h-[600px]">
+       {   <div className="overflow-y-auto max-h-[600px]">
           <ul>
             {filteredTransactions.map((transaction, index) => (
               <li key={transaction._id} className="mb-6">
@@ -189,7 +191,7 @@ const TransactionList: React.FC = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div>}
       </section>
     </main>
   );

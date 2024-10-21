@@ -25,11 +25,16 @@ const initialState: TransactionsState = {
 };
 
 // Async thunk to fetch transactions from backend
+const host = process.env.NEXT_PUBLIC_HOST_API  // Fallback for localhost
+
+// Async thunk to fetch transactions from backend
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetchTransactions',
   async (userId: string, { rejectWithValue }) => { // Accept userId as a parameter
+    // console.log(`${host}/expenses/${userId}`)
     try {
-      const response = await fetch(`http://localhost:3000/expenses/${userId}`); // Use userId in the URL
+      console.log(`${host}/expenses/${userId}`)
+      const response = await fetch(`${host}/expenses/${userId}`); // Use host and userId in the URL
       if (!response.ok) throw new Error('Failed to fetch transactions');
       const data = await response.json();
       return data;
@@ -38,6 +43,7 @@ export const fetchTransactions = createAsyncThunk(
     }
   }
 );
+
 
 
 // Create the slice

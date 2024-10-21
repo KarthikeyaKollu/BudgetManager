@@ -2,7 +2,6 @@ import React from 'react';
 import PieChartComponent from '@/components/PieChartComponent'
 
 const MonthlyExpenseCard = ({summary}) => {
- console.log(summary,"at summary")
 
     const legendItems = [
         { color: '#27ae60', label: 'Essentials', amount: summary.essentials||0 },

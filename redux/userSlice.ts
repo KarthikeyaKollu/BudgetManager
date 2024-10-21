@@ -1,4 +1,3 @@
-// userSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 interface User {
@@ -19,12 +18,14 @@ const initialState: UsersState = {
   error: null,
 };
 
+const host = process.env.NEXT_PUBLIC_HOST_API  // Fallback for localhost
+
 // Middleware to post a new user
 export const postUser = createAsyncThunk(
   'users/postUser',
   async (user: User, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:3000/users', {
+      const response = await fetch(`${host}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),
@@ -42,7 +43,7 @@ export const updateUser = createAsyncThunk(
   'users/updateUser',
   async ({ id, data }: { id: string; data: User }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:3000/users/${id}`, {
+      const response = await fetch(`${host}/users/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
