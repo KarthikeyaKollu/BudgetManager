@@ -1,6 +1,7 @@
 // transactionSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
+
 // Define the structure of a transaction
 interface Transaction {
   _id: string;
@@ -31,8 +32,8 @@ const host = process.env.NEXT_PUBLIC_HOST_API  // Fallback for localhost
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetchTransactions',
   async (
-    { userId, category = 'All', subcategory = 'All' }: 
-    { userId: string; category?: string; subcategory?: string }, 
+    { userId, category = 'All', subcategory = 'All', token }:
+      { userId: string; category?: string; subcategory?: string, token: string },
     { rejectWithValue }
   ) => {
     try {
@@ -44,7 +45,14 @@ export const fetchTransactions = createAsyncThunk(
       const url = `${host}/expenses/${userId}?${queryParams.toString()}`;
       console.log(url); // Useful for debugging the final URL
 
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        method: 'GET', // Specify the method
+        headers: {
+          'Authorization': `Bearer ${token}`, // Include the JWT in the Authorization header
+          'Content-Type': 'application/json',
+        },
+      });
+
       if (!response.ok) throw new Error('Failed to fetch transactions');
 
       const data = await response.json();

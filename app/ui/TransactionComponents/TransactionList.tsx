@@ -4,6 +4,7 @@ import { fetchTransactions } from "@/redux/transactionSlice";
 import { RootState, AppDispatch } from "@/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useUser } from "@clerk/nextjs";
+import { useSession } from '@clerk/nextjs'
 
 interface Transaction {
   _id: string;
@@ -52,6 +53,7 @@ const TransactionList: React.FC = () => {
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>("All");
   const { user } = useUser(); // Use useUser hook to get the user object
   const userId = user?.id;
+  const { session } = useSession();
 
   const dispatch = useDispatch<AppDispatch>();
   const { items: transactions, loading, error } = useSelector(
@@ -60,12 +62,14 @@ const TransactionList: React.FC = () => {
 
   useEffect(() => {
     const handleFetchTransactions = async () => {
+      const token = await session?.getToken();
       if (userId) {
         const resultAction = await dispatch(fetchTransactions({
           userId: 'user_2nmuwjdJoMdWIlhRu6Xf5z34fB2',
           category: selectedCategory,
-          subcategory:selectedSubcategory
-        }));;
+          subcategory:selectedSubcategory,
+          token : token
+        }));
         if (fetchTransactions.fulfilled.match(resultAction)) {
           // Success handling
         } else {

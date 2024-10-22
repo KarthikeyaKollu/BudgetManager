@@ -49,7 +49,14 @@ const PieChart = () => {
 
     try {
       const response = await fetch(
-        `${host}/expenses/${userId}?category=All&subcategory=All&startDate=${startDate}&endDate=${endDate}`
+        `${host}/expenses/${userId}?category=All&subcategory=All&startDate=${startDate}&endDate=${endDate}`,
+        {
+          method: 'GET', // Specify the method
+          headers: {
+            'Authorization': `Bearer ${token}`, // Include the JWT in the Authorization header
+            'Content-Type': 'application/json',
+          },
+        }
       );
 
       if (!response.ok) throw new Error('Failed to fetch transactions');
@@ -62,15 +69,6 @@ const PieChart = () => {
   };
 
 
-  const fetchUserToken = async () => {
-    try {
-      const jwtToken = await getToken(); // Get the JWT
-      return jwtToken
-      // Use the token for API requests here
-    } catch (error) {
-      console.error("Error fetching token:", error);
-    }
-  };
 
   // Call the function to fetch the token
   const calculateSummary = () => {
