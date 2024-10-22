@@ -103,14 +103,14 @@ const Modal = ({ onClose }) => {
 
 
   return (
-    <div className="w-[414px] h-[562px] bg-white rounded-2xl shadow p-5 relative">
+    <div className="w-[414px] h-[562px] bg-white rounded-[16px] shadow px-[45px] space-y-[16px] relative flex flex-col  justify-center">
       <button
         className="absolute top-2 right-2"
         onClick={onClose}
       >
         ✖️
       </button>
-      <div className="text-black text-2xl font-medium mb-5">New Expense</div>
+      <div className="text-black text-[24px] font-semibold mb-5">New Expense</div>
 
       <div className="mb-4">
         <label className="text-[#606060] text-xs font-medium">What did you spend on?</label>

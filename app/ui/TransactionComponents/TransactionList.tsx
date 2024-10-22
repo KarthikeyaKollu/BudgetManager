@@ -164,7 +164,7 @@ const TransactionList: React.FC = () => {
           ))}
         </div>
 
-       {   <div className="overflow-y-auto max-h-[600px]">
+       {   <div className="overflow-y-auto max-h-full scrollbar-hide">
           <ul>
             {filteredTransactions.map((transaction, index) => (
               <li key={transaction._id} className="mb-6">
