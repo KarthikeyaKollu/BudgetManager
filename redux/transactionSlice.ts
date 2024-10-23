@@ -43,7 +43,6 @@ export const fetchTransactions = createAsyncThunk(
       });
 
       const url = `${host}/expenses/${userId}?${queryParams.toString()}`;
-      console.log(url); // Useful for debugging the final URL
 
       const response = await fetch(url, {
         method: 'GET', // Specify the method

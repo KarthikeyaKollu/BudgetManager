@@ -36,7 +36,6 @@ const categories = [
 const Modal = ({ onClose }) => {
 
   const { user } = useUser(); // Use useUser hook to get the user object
-  console.log(user?.id)
   const [formData, setFormData] = useState({
     what: '',
     amount: '',
@@ -61,8 +60,6 @@ const Modal = ({ onClose }) => {
   };
 
   const handleSubmit = async () => {
-    console.log('Form Data:', { ...formData, clerkId: user?.id });
-
     try {
       await postExpense({ ...formData, clerkId: user?.id }); // Await the postExpense call
       alert("Successfully added"); // Correct the spelling
@@ -94,7 +91,6 @@ const Modal = ({ onClose }) => {
       }
 
       const result = await response.json();
-      console.log('Expense added successfully:', result);
       return result;
     } catch (error) {
       console.error('Failed to add expense:', error.message);

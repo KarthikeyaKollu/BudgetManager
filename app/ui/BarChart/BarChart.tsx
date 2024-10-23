@@ -59,6 +59,7 @@ const BarChart = () => {
       const transactionDate = new Date(transaction.createdAt);
       const dateKey = transactionDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
 
+
       // Determine category amounts
       if (transaction.category === "Essential Expenses") {
         if (!dateMap[dateKey]) {
@@ -107,16 +108,15 @@ const BarChart = () => {
       });
     }
 
-    return formattedData.reverse(); // Reverse to have the most recent date on the right
+    return formattedData; // Reverse to have the most recent date on the right
   };
 
   useEffect(() => {
     const fetchData = async () => {
       if (userId) {
-        const transactions = await fetchLast7DaysTransactions(userId);
+        const transactions = await fetchLast7DaysTransactions(userId);        
         const data = generateChartData(transactions);
-        setChartData(data.reverse());
-        console.log(data);
+        setChartData(data);
       }
     };
 
