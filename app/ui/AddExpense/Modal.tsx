@@ -1,6 +1,8 @@
 "use client"
 import React, { useState } from 'react';
 import { useUser } from "@clerk/nextjs";
+import { useSession } from '@clerk/nextjs'
+
 const categories = [
   {
     category: "Essential Expenses",
@@ -34,6 +36,7 @@ const categories = [
   },
 ];
 const Modal = ({ onClose }) => {
+  const { session } = useSession();
 
   const { user } = useUser(); // Use useUser hook to get the user object
   const [formData, setFormData] = useState({
@@ -63,7 +66,7 @@ const Modal = ({ onClose }) => {
     try {
       await postExpense({ ...formData, clerkId: user?.id }); // Await the postExpense call
       alert("Successfully added"); // Correct the spelling
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("Error adding expense:", error); // Log the error for debugging
       alert("Failed to add expense"); // Update the alert message for clarity
@@ -77,9 +80,11 @@ const Modal = ({ onClose }) => {
 
   const postExpense = async (expenseData) => {
     try {
+      const token = await session?.getToken();
       const response = await fetch(`${host}/expenses`, {
-        method: 'POST',
+        method: 'POST', // Specify the method
         headers: {
+          'Authorization': `Bearer ${token}`, // Include the JWT in the Authorization header
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(expenseData),

@@ -63,6 +63,7 @@ const TransactionList: React.FC = () => {
   useEffect(() => {
     const handleFetchTransactions = async () => {
       const token = await session?.getToken();
+
       if (userId) {
         const resultAction = await dispatch(fetchTransactions({
           userId: 'user_2nmuwjdJoMdWIlhRu6Xf5z34fB2',
